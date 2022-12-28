@@ -21,6 +21,7 @@ class Participant:
 
 
 rows = []
+o2 = []
 with open("sebastian 11-18\O2Ring_20221118173026_OXIRecord.csv", 'r') as file:
     csvreader = csv.reader(file)
     header = next(csvreader)
@@ -29,5 +30,6 @@ with open("sebastian 11-18\O2Ring_20221118173026_OXIRecord.csv", 'r') as file:
 print(header)
 for row in rows:  
     #Turn each row into a list of each thing in row 
-
+    paresedRow = row.split(",")
+    o2.append(paresedRow)
     print(row)
