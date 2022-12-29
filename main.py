@@ -28,8 +28,9 @@ with open("sebastian 11-18\O2Ring_20221118173026_OXIRecord.csv", 'r') as file:
     for row in csvreader:
         rows.append(row)
 print(header)
-for row in rows:  
+for time, sp02, pulse, motion, sp02reminder, pulseReminder in rows:  
     #Turn each row into a list of each thing in row 
-    paresedRow = row.split(",")
-    o2.append(paresedRow)
-    print(row)
+    print (time, sp02, pulse, motion, sp02reminder, pulseReminder)
+  #  paresedRow = row.split(",")
+   # o2.append(paresedRow)
+    #print(row)
