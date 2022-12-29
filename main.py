@@ -21,16 +21,17 @@ class Participant:
 
 
 rows = []
-o2 = []
+heartRate = []
 with open("sebastian 11-18\O2Ring_20221118173026_OXIRecord.csv", 'r') as file:
     csvreader = csv.reader(file)
     header = next(csvreader)
     for row in csvreader:
         rows.append(row)
 print(header)
+#Way to specify which column we are using
 for time, sp02, pulse, motion, sp02reminder, pulseReminder in rows:  
     #Turn each row into a list of each thing in row 
     print (time, sp02, pulse, motion, sp02reminder, pulseReminder)
   #  paresedRow = row.split(",")
-   # o2.append(paresedRow)
+    heartRate.append(pulse)
     #print(row)
