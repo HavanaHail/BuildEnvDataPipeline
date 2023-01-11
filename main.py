@@ -40,4 +40,4 @@ for time, sp02, pulse, motion, sp02reminder, pulseReminder in rows:
   #  paresedRow = row.split(",")
     heartRate.append(pulse)
     #print(row)
-print("Pulse average is: %d", mean/count)
+print("Pulse average is: ", int(mean/count))
