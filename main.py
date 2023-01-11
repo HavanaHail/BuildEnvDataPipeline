@@ -29,9 +29,15 @@ with open("sebastian 11-18\O2Ring_20221118173026_OXIRecord.csv", 'r') as file:
         rows.append(row)
 print(header)
 #Way to specify which column we are using
+mean = 0
+count = 0
 for time, sp02, pulse, motion, sp02reminder, pulseReminder in rows:  
     #Turn each row into a list of each thing in row 
     print (time, sp02, pulse, motion, sp02reminder, pulseReminder)
+    if int(pulse)>50 and int(pulse)<150:
+        mean += int(pulse)
+        count +=1
   #  paresedRow = row.split(",")
     heartRate.append(pulse)
     #print(row)
+print("Pulse average is: %d", mean/count)
