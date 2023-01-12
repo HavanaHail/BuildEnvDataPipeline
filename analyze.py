@@ -1,3 +1,4 @@
+import numpy as np
 import mne
 import os.path as op
 from matplotlib import pyplot as plt
@@ -6,10 +7,11 @@ from matplotlib import pyplot as plt
 data_path = op.join(mne.datasets.sample.data_path(), 'MEG',
                     'sample', 'sample_audvis_raw.fif')
 #raw = mne.io.read_raw_fif(data_path, preload=True)
-raw = mne.io.read_raw_edf('opensignals_scrappy.edf')
+raw = mne.io.read_raw_edf('experiemtData-11-18.edf')
 raw.set_eeg_reference('average', projection=True)  # set EEG average reference
+#CH2 channel
 
-# Give the sample rate
+# Give the sample rate1
 print('sample rate:', raw.info['sfreq'], 'Hz')
 # Give the size of the data matrix
 print('%s channels x %s samples' % (raw.info['nchan'], len(raw.times)))
