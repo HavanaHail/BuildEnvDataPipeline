@@ -1,5 +1,6 @@
 import csv
 import struct
+import typer
 
 # starting struct
 participantsCount = 0 
