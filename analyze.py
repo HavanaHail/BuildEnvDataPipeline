@@ -7,7 +7,7 @@ from matplotlib import pyplot as plt
 data_path = op.join(mne.datasets.sample.data_path(), 'MEG',
                     'sample', 'sample_audvis_raw.fif')
 #raw = mne.io.read_raw_fif(data_path, preload=True)
-raw = mne.io.read_raw_edf('experiemtData-11-18.edf')
+raw = mne.io.read_raw_edf('EMILY\emily0007804b1875_2022-12-15_16-24-08.edf')
 raw.set_eeg_reference('average', projection=True)  # set EEG average reference
 #CH2 channel
 
