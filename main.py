@@ -1,5 +1,7 @@
 import csv
 import struct
+import matplotlib.pyplot as plt
+
 
 # starting struct
 participantsCount = 0 
@@ -22,6 +24,8 @@ class Participant:
 
 rows = []
 heartRate = []
+clock = []
+ave = []
 with open("sebastian 11-18\O2Ring_20221118173026_OXIRecord.csv", 'r') as file:
     csvreader = csv.reader(file)
     header = next(csvreader)
@@ -31,13 +35,22 @@ print(header)
 #Way to specify which column we are using
 mean = 0
 count = 0
+
 for time, sp02, pulse, motion, sp02reminder, pulseReminder in rows:  
     #Turn each row into a list of each thing in row 
     print (time, sp02, pulse, motion, sp02reminder, pulseReminder)
     if int(pulse)>50 and int(pulse)<150:
         mean += int(pulse)
         count +=1
+        heartRate.append(pulse)
+        clock.append(time)
   #  paresedRow = row.split(",")
-    heartRate.append(pulse)
     #print(row)
-print("Pulse average is: ", int(mean/count))
+ave = int(mean/count)
+print("Pulse average is: ", ave)
+plt.plot(clock,heartRate, label = 'Pulse')
+#plt.axhline(y=ave, color = 'r')
+plt.xlabel('time')
+plt.ylabel('heartrate')
+plt.title('participant #')
+plt.show()
