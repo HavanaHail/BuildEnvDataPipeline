@@ -27,7 +27,7 @@ rows = []
 heartRate = []
 clock = []
 ave = []
-with open("sebastian 11-18\O2Ring_20221118173026_OXIRecord.csv", 'r') as file:
+with open("O2Ring_20221118173026_OXIRecord.csv", 'r') as file:
     csvreader = csv.reader(file)
     header = next(csvreader)
     for row in csvreader:
@@ -43,15 +43,16 @@ for time, sp02, pulse, motion, sp02reminder, pulseReminder in rows:
     if int(pulse)>50 and int(pulse)<150:
         mean += int(pulse)
         count +=1
-        heartRate.append(pulse)
-        clock.append(time)
+        heartRate.append(int(pulse))
+        clock.append(time[0:7])
   #  paresedRow = row.split(",")
     #print(row)
 ave = int(mean/count)
 print("Pulse average is: ", ave)
 plt.plot(clock,heartRate, label = 'Pulse')
-#plt.axhline(y=ave, color = 'r')
+plt.axhline(y=ave, color = 'r', linestyle = 'dashed', label = 'Average')
 plt.xlabel('time')
 plt.ylabel('heartrate')
+plt.xticks(rotation=90,fontsize='small')
 plt.title('participant #')
 plt.show()
