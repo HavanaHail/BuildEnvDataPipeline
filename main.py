@@ -2,6 +2,7 @@ import csv
 import struct
 import matplotlib.pyplot as plt
 
+import typer
 
 # starting struct
 participantsCount = 0 
