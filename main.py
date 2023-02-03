@@ -37,7 +37,7 @@ print(header)
 mean = 0
 count = 0
 watch = 0
-
+#Check for motion
 for time, sp02, pulse, motion, sp02reminder, pulseReminder in rows:  
     #Turn each row into a list of each thing in row 
     print (time, sp02, pulse, motion, sp02reminder, pulseReminder)

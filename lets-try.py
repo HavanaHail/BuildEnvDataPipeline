@@ -4,7 +4,7 @@ data = np.loadtxt('EMILY\emily0007804b1875_2022-12-15_16-24-08.txt')
 import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set(font_scale=1.2)
-
+# Theres a versin  of mne without epoc
 # Define sampling frequency and time vector
 sf = 300.
 time = np.arange(data.size) / sf
