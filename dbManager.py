@@ -2,6 +2,9 @@ import pymongo
 from pymongo import MongoClient
 import csv
 import json
+import pandas as pd
+import numpy as np
+
 
 
 # Function to convert a CSV to JSON
@@ -55,4 +58,12 @@ if isinstance(file_data, list):
     Collection.insert_many(file_data)
 else:
     Collection.insert_one(file_data)
+
+def o2ToCSV(heartBeat, time, target):
+    arr = np.asarray([heartBeat, time])
+    data = pd.DataFrame(arr).to_csv(target, header =['HeartBeat', 'Time'])
+    return data
+
+
+
 
