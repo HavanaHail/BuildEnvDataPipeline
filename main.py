@@ -37,27 +37,37 @@ print(header)
 mean = 0
 count = 0
 watch = 0
+
 #Check for motion
 for time, sp02, pulse, motion, sp02reminder, pulseReminder in rows:  
     #Turn each row into a list of each thing in row 
     print (time, sp02, pulse, motion, sp02reminder, pulseReminder)
-    if int(pulse)>50 and int(pulse)<150:
-        mean += int(pulse)
-        count +=1
-        heartRate.append(int(pulse))
-        clock.append(watch)
-        watch +=4
+    if int(pulse)>60 and int(pulse)<100:
+        if int(pulse)< lastbmp+7 and int(pulse)>lastbmp-7:
+            mean += int(pulse)
+            count +=1
+            heartRate.append(int(pulse))
+            clock.append(watch)
+    watch +=4
+    lastbmp = int(pulse)
   #  paresedRow = row.split(",")
     #print(row)
 ave = int(mean/count)
-print("Pulse average is: ", ave)
-plt.plot(clock,heartRate, label = 'Pulse')
-plt.axhline(y=ave, color = 'r', linestyle = 'dashed', label = 'Average')
-plt.axvline(x=120,color ='g',linestyle ='dashed')
-plt.axvline(x=300,color ='g',linestyle ='dashed')
-plt.axvline(x=800,color ='g',linestyle ='dashed')
-plt.xlabel('time (secs)')
-plt.ylabel('heartrate')
-plt.xticks(rotation=90,fontsize='small')
-plt.title('participant #')
-plt.show()
+#writing in new cleaned data
+fields = ['time','heartrate']
+name = "CleanedData" + ".csv"
+with open(name,'w') as csvfile:
+    for pulse in heartRate:
+        
+
+#print("Pulse average is: ", ave)
+#plt.plot(clock,heartRate, label = 'Pulse')
+#plt.axhline(y=ave, color = 'r', linestyle = 'dashed', label = 'Average')
+#plt.axvline(x=120,color ='g',linestyle ='dashed')
+#plt.axvline(x=300,color ='g',linestyle ='dashed')
+# plt.axvline(x=800,color ='g',linestyle ='dashed')
+# plt.xlabel('time (secs)')
+# plt.ylabel('heartrate')
+# plt.xticks(rotation=90,fontsize='small')
+# plt.title('participant #')
+# plt.show()
