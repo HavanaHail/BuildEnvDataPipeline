@@ -8,7 +8,7 @@ sample_data_folder = mne.datasets.sample.data_path()
 #raw = mne.io.read_raw_edf('EMILY\emily0007804b1875_2022-12-15_16-24-08.edf', preload = 'true')
 #raw = raw.pick_types(meg=False, eeg=True, eog=False,)
 #h5 has events
-raw = mne.time_frequency.read_tfrs('EMILY\emily0007804b1875_2022-12-15_16-24-08_tfr.h5')
+raw = mne.time_frequency.read_tfrs('EMILY/emily0007804b1875_2022-12-15_16-24-08_tfr.h5')
 raw = raw.pick_types(meg=False, eeg=True, eog=False,)
 print(type(raw))
 data_array = raw[:][0]
