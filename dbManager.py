@@ -6,7 +6,6 @@ import pandas as pd
 import numpy as np
 
 
-
 # Function to convert a CSV to JSON
 # Takes the file paths as arguments
 def make_json(csvFilePath, jsonFilePath):
@@ -35,15 +34,16 @@ def make_json(csvFilePath, jsonFilePath):
 
 # Decide the two file paths according to your
 # computer system
-#csvFilePath = r'Names.csv'
-#jsonFilePath = r'Names.json'
+# csvFilePath = r'Names.csv'
+# jsonFilePath = r'Names.json'
 
 # Call the make_json function
-#make_json(csvFilePath, jsonFilePath)
+# make_json(csvFilePath, jsonFilePath)
 
-make_json("CSV/test/Built Environment Survey_January 30, 2023_20.24-2.csv", "CSV/test/Built Environment Survey_January 30, 2023_20.24-2.json")
+make_json("CSV/test/Built Environment Survey_January 30, 2023_20.24-2.csv",
+          "CSV/test/Built Environment Survey_January 30, 2023_20.24-2.json")
 
-client = MongoClient("mongodb://localhost:27017/");
+client = MongoClient("mongodb://localhost:27017/")
 
 db = client["BENV"]
 
@@ -51,19 +51,16 @@ Collection = db["PANAS"]
 
 with open("CSV/test/Built Environment Survey_January 30, 2023_20.24-2.json") as file:
     file_data = json.load(file)
- # Inserting the loaded data in the Collection
- # if JSON contains data more than one entry
- # insert_many is used else insert_one is used
+# Inserting the loaded data in the Collection
+# if JSON contains data more than one entry
+# insert_many is used else insert_one is used
 if isinstance(file_data, list):
     Collection.insert_many(file_data)
 else:
     Collection.insert_one(file_data)
 
-def o2ToCSV(heartBeat, time, target):
+
+def o2ToCSV(heartBeat, time, fileName):
     arr = np.asarray([heartBeat, time])
-    data = pd.DataFrame(arr).to_csv(target, header =['HeartBeat', 'Time'])
+    data = pd.DataFrame(arr).to_csv(fileName, header=['HeartBeat', 'Time'])
     return data
-
-
-
-
