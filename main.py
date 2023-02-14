@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import typer
 
 # starting struct
-participantsCount = 0 
+participantsCount = 0
 
 class Participant:
     def __init__(self,idNum, o2Csv,eegEdf,eegCsv,video,panas1, panas2, date, recorder, room, universalTime):

@@ -1,0 +1,119 @@
+{
+    "Recorded Date": {
+        "RecordedDate": "Recorded Date",
+        "SC1": "PANAS_PA",
+        "SC2": "PANAS_NA",
+        "SC3": "PANAS_SN",
+        "ResponseId": "Response ID",
+        "StartDate": "Start Date",
+        "EndDate": "End Date"
+    },
+    "{\"ImportId\":\"recordedDate\",\"timeZone\":\"America/Denver\"}": {
+        "RecordedDate": "{\"ImportId\":\"recordedDate\",\"timeZone\":\"America/Denver\"}",
+        "SC1": "{\"ImportId\":\"SC_3PqRw5YbLVvyqs6\"}",
+        "SC2": "{\"ImportId\":\"SC_eXsVpSdWIBYv10a\"}",
+        "SC3": "{\"ImportId\":\"SC_3scqusb0z8Ij2SO\"}",
+        "ResponseId": "{\"ImportId\":\"_recordId\"}",
+        "StartDate": "{\"ImportId\":\"startDate\",\"timeZone\":\"America/Denver\"}",
+        "EndDate": "{\"ImportId\":\"endDate\",\"timeZone\":\"America/Denver\"}"
+    },
+    "2022-12-14 10:44:48": {
+        "RecordedDate": "2022-12-14 10:44:48",
+        "SC1": "15",
+        "SC2": "29",
+        "SC3": "4",
+        "ResponseId": "R_3pccoTwajNkl89t",
+        "StartDate": "2022-12-14 10:43:36",
+        "EndDate": "2022-12-14 10:44:48"
+    },
+    "2022-12-14 10:45:23": {
+        "RecordedDate": "2022-12-14 10:45:23",
+        "SC1": "27",
+        "SC2": "13",
+        "SC3": "8",
+        "ResponseId": "R_3fUYGRgvBSfmNvB",
+        "StartDate": "2022-12-14 10:44:14",
+        "EndDate": "2022-12-14 10:45:22"
+    },
+    "2022-12-14 10:46:17": {
+        "RecordedDate": "2022-12-14 10:46:17",
+        "SC1": "22",
+        "SC2": "26",
+        "SC3": "5",
+        "ResponseId": "R_3gSo7M83x44UdvZ",
+        "StartDate": "2022-12-14 10:44:21",
+        "EndDate": "2022-12-14 10:46:17"
+    },
+    "2022-12-14 10:47:30": {
+        "RecordedDate": "2022-12-14 10:47:30",
+        "SC1": "17",
+        "SC2": "11",
+        "SC3": "10",
+        "ResponseId": "R_1P76HVFoKvZ6BW5",
+        "StartDate": "2022-12-14 10:45:55",
+        "EndDate": "2022-12-14 10:47:30"
+    },
+    "2022-12-14 10:48:39": {
+        "RecordedDate": "2022-12-14 10:48:39",
+        "SC1": "28",
+        "SC2": "16",
+        "SC3": "4",
+        "ResponseId": "R_3snMd14Y8rouMc4",
+        "StartDate": "2022-12-14 10:47:07",
+        "EndDate": "2022-12-14 10:48:38"
+    },
+    "2022-12-14 11:03:41": {
+        "RecordedDate": "2022-12-14 11:03:41",
+        "SC1": "29",
+        "SC2": "20",
+        "SC3": "9",
+        "ResponseId": "R_2awWWzfhWSnoTCT",
+        "StartDate": "2022-12-14 11:02:30",
+        "EndDate": "2022-12-14 11:03:41"
+    },
+    "2022-12-14 12:19:28": {
+        "RecordedDate": "2022-12-14 12:19:28",
+        "SC1": "25",
+        "SC2": "26",
+        "SC3": "9",
+        "ResponseId": "R_2RWl794vmBoQXTJ",
+        "StartDate": "2022-12-14 12:18:31",
+        "EndDate": "2022-12-14 12:19:28"
+    },
+    "2022-12-14 12:21:08": {
+        "RecordedDate": "2022-12-14 12:21:08",
+        "SC1": "24",
+        "SC2": "34",
+        "SC3": "9",
+        "ResponseId": "R_vBHsL5m0DIbG1k5",
+        "StartDate": "2022-12-14 12:19:20",
+        "EndDate": "2022-12-14 12:21:07"
+    },
+    "2022-12-15 14:26:09": {
+        "RecordedDate": "2022-12-15 14:26:09",
+        "SC1": "35",
+        "SC2": "12",
+        "SC3": "11",
+        "ResponseId": "R_1MMw3VW3XiJ8JXB",
+        "StartDate": "2022-12-15 14:22:54",
+        "EndDate": "2022-12-15 14:26:08"
+    },
+    "2022-12-15 14:47:08": {
+        "RecordedDate": "2022-12-15 14:47:08",
+        "SC1": "41",
+        "SC2": "11",
+        "SC3": "13",
+        "ResponseId": "R_RqyYzzcrh8aU3EB",
+        "StartDate": "2022-12-15 14:45:28",
+        "EndDate": "2022-12-15 14:47:08"
+    },
+    "2022-12-21 20:33:25": {
+        "RecordedDate": "2022-12-21 20:33:25",
+        "SC1": "0",
+        "SC2": "0",
+        "SC3": "0",
+        "ResponseId": "R_1FDnps8kreSXDBt",
+        "StartDate": "2022-12-12 19:35:42",
+        "EndDate": "2022-12-14 20:33:24"
+    }
+}
