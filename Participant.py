@@ -23,8 +23,8 @@ app = typer.Typer()
 
 
 @app.command()
-def readPANAS():
-    filePath = input("Enter CSV filepath:\n")
+def readPANAS(filePath):
+    #filePath = input("Enter CSV filepath:\n")
     f = open(filePath, 'r')
     reader = csv.reader(f)
     results = {}
@@ -37,8 +37,8 @@ def readPANAS():
 
 
 @app.command()
-def readEEG():
-    filePath = input("Enter H5 filepath:\n")
+def readEEG(filePath):
+    #filePath = input("Enter H5 filepath:\n")
     # f = open(filePath, 'r')
     results = {}
     # fpath = sys.argv[1]
@@ -47,9 +47,20 @@ def readEEG():
     # df = pd.read_hdf(fpath, key=key)
     # else:
     df = pd.read_hdf(filePath)
-    print(f"Finish")
     df.to_csv(results, index=False)
     print(f"results: {results}")
 
+#Pass in 4 filepaths
+@app.command()
+def createExperiment():
+    Panas1 = readPANAS(sys.argv[2])
+    Panas2 = readPANAS(sys.argv[3])
+    o2 = sys.argv[4]
+    eeg = sys.argv[5]
+    e = Experiment(Panas1, Panas2, o2, eeg)
+    print(e)
+    return e
+
 if __name__ == "__main__":
+    createExperiment()
     app()

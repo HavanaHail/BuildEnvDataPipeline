@@ -9,18 +9,18 @@ participantsCount = 0
 
 class Participant:
     def __init__(self,idNum, o2Csv,eegEdf,eegCsv,video,panas1, panas2, date, recorder, room, universalTime):
-        self.idNum = idNum;
-        self.o2Csv = o2Csv;
-        self.eegEdf = eegEdf;
-        self.eegCsv = eegCsv;
-        self.video = video;
-        self.panas1 = panas1;
-        self.panas2 = panas2;
-        self. date = date;
-        self.recorder = recorder;
-        self.room = room;
-        self.univeralTime = universalTime;
-        participantsCount+=1
+        self.idNum = idNum
+        self.o2Csv = o2Csv
+        self.eegEdf = eegEdf
+        self.eegCsv = eegCsv
+        self.video = video
+        self.panas1 = panas1
+        self.panas2 = panas2
+        self. date = date
+        self.recorder = recorder
+        self.room = room
+        self.univeralTime = universalTime
+        #participantsCount+=1
 
 
 rows = []
