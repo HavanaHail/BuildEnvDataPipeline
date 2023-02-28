@@ -7,6 +7,7 @@ from office365.sharepoint.files.file import File
 env = environ.Env()
 environ.Env().read_env()
 
+
 USERNAME = env('sharepoint_email')
 PASSWORD = env('sharepoint_password')
 SHAREPOINT_SITE = env('sharepoint_url_site')
@@ -18,6 +19,7 @@ class SharePoint:
         conn = ClientContext(SHAREPOINT_SITE).with_credentials(
             UserCredential(USERNAME, PASSWORD)
         )
+        conn2 = ClientContext(SHAREPOINT_SITE).with_access_token()
         return conn
 
     def _get_file_list(self, folder_name):
@@ -42,3 +44,5 @@ class SharePoint:
         target_folder = conn.web.get_folder_by_server_relative_path(target_folder_url)
         response = target_folder.upload_file(file_name, content).execute_query()
         return response
+
+#3d90a1b0-d68d-4733-a4a2-b54b1d10b607
