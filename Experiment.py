@@ -69,7 +69,7 @@ def panasToCSV(target, dict):
         print(target)
         writer = csv.DictWriter(csvFile, fieldnames=field_names)
         writer.writeheader()
-        writer.writerows(dict)
+        writer.writerows(dict) ##NOT WORKING
 
 if __name__ == '__main__':
     createExperiment()
