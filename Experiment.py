@@ -1,5 +1,6 @@
 import csv
 import sys,os
+import pandas
 
 from numpy import double
 
@@ -38,10 +39,10 @@ def createExperiment():
                 print(os.path.basename(f))
             elif 'PANAS' in os.path.basename(f):
                     #Process panas data Todo
-                PANAS_DAT = readPANAS(f)
+                PANAS_DAT = readPANAS2(f)
                 print(PANAS_DAT)
                     ##ADD TO FOLDER
-                target = target_path + '/' + 'PANAS' + '1' ##Panas number hardcoded for now
+                target = target_path + '/' + 'PANAS' + '1' +'.csv' ##Panas number hardcoded for now
                 print(target)
                 PANAS_RES = panasToCSV(target, PANAS_DAT)
 
@@ -62,13 +63,20 @@ def readPANAS(filePath):
 
     #print(f"results: {results}")
     return results
+def readPANAS2(filePath):
+    with open(filePath, 'r') as data:
+        for line in csv.reader(data):
+            print(line)
+        return data
 
 def panasToCSV(target, dict):
     field_names = ['PANAS_PA', 'PANAS_NA', 'PANAS_SN']
+
     with open(target, 'w') as csvFile:
         print(target)
         writer = csv.DictWriter(csvFile, fieldnames=field_names)
         writer.writeheader()
+        print(dict)
         writer.writerows(dict) ##NOT WORKING
 
 if __name__ == '__main__':

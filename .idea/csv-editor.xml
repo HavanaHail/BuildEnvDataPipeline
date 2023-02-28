@@ -38,6 +38,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/EMILY/Result/PANAS1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
