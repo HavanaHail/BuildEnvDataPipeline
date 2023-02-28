@@ -41,7 +41,7 @@ def createExperiment():
                 PANAS_DAT = readPANAS(f)
                 print(PANAS_DAT)
                     ##ADD TO FOLDER
-                target = target_path + '/' + 'PANAS' + '1'
+                target = target_path + '/' + 'PANAS' + '1' ##Panas number hardcoded for now
                 print(target)
                 PANAS_RES = panasToCSV(target, PANAS_DAT)
 
