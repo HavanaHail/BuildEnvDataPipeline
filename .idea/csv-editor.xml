@@ -17,6 +17,27 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/EMILY/Built Environment Survey_January 30, 2023_20.24-2PANAS.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/EMILY/Built_Environment_Survey_January_15_2023_12_24.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/EMILY/Built_Environment_Survey_January_15_2023_12_24PANAS.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

@@ -34,6 +34,7 @@ def readPANAS(filePath):
                            'PANAS_SN': (double(row[3])) / 3}
 
     print(f"results: {results}")
+    return results
 
 
 @app.command()

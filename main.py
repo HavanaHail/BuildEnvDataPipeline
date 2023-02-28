@@ -2,12 +2,13 @@ import csv
 import struct
 import matplotlib.pyplot as plt
 import numpy as np
+import sys, os
 from numpy import nan
 
-import typer
 
 # starting struct
 participantsCount = 0
+
 
 class Participant:
     def __init__(self,idNum, o2Csv,eegEdf,eegCsv,video,panas1, panas2, date, recorder, room, universalTime):
