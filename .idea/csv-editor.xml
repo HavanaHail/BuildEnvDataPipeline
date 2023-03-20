@@ -10,14 +10,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/CSV/test/Built_Environment_Survey_January 15_2023_12_24.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/EMILY/Built Environment Survey_January 30, 2023_20.24-2PANAS.csv">
+        <entry key="/CSV/test/CSVTEST_PANAS.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -39,6 +32,13 @@
           </value>
         </entry>
         <entry key="/EMILY/Result/PANAS1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/EMILY/Result1856/PANAS1.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
