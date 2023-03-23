@@ -50,6 +50,21 @@ def createExperiment():
 
 
 
+def getPanasScores(target, idNum):
+    csv_file = csv.reader(open(target, "r"), delimiter=",")
+    panasCount = 1
+    array = []
+
+    for row in csv_file:
+        strId = str(idNum)
+        # if current rows 2nd value is equal to input, print that row
+        if strId == row[4]:
+            #print(row)
+            array.append(row)
+    #print(array)
+    result = np.asarray(array)
+    return result
+
 # def readPANAS(filePath):
 #     #filePath = input("Enter CSV filepath:\n")
 #     f = open(filePath, 'r')
@@ -78,22 +93,6 @@ def createExperiment():
 #        # print(dict)
 #         writer.writerows(dict) ##NOT WORKING - I/O operation on closed file
 #         return csvFile
-
-def getPanasScores(target, idNum):
-    csv_file = csv.reader(open(target, "r"), delimiter=",")
-    panasCount = 1
-    array = []
-
-    for row in csv_file:
-        strId = str(idNum)
-        # if current rows 2nd value is equal to input, print that row
-        if strId == row[4]:
-            #print(row)
-            array.append(row)
-    #print(array)
-    result = np.asarray(array)
-    return result
-
 
 
 if __name__ == '__main__':
