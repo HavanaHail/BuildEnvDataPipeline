@@ -8,8 +8,6 @@ from numpy import nan
 rows = []
 heartRate = []
 clock = []
-#csvfile = csv.reader("../")
-header = ''
 def readInO2ring():
     
     ave = []
@@ -26,25 +24,31 @@ def readInO2ring():
     watch = 0
     lastbmp = 0
     # Check for motion
-    for time, sp02, pulse, motion, sp02reminder, pulseReminder in rows:
+    time = 0
+    sp02 =1
+    pulse =2 
+    motion =3 
+    sp02reminder =4
+    pulseReminder = 5
+    for i in range(len(rows)):
         # Turn each row into a list of each thing in row
     # print (time, sp02, pulse, motion, sp02reminder, pulseReminder)
-        if int(pulse) > 60 and int(pulse) < 100:
+        if int(rows[i][pulse]) > 60 and int(rows[i][pulse]) < 100:
             # if int(pulse)<= lastbmp+7 and int(pulse)>=lastbmp-7 or lastbmp == 0:
-            print(watch, pulse)
-            mean += int(pulse)
+           # print(watch, pulse)
+            mean += int(rows[i][pulse])
             count += 1
-            heartRate.append(int(pulse))
+            heartRate.append(int(rows[i][pulse]))
             clock.append(watch)
-            time = watch
+            rows[i][time] = watch
             # else:
             #   heartRate.append(np.nan)
             #  clock.append(watch)
         else:
             heartRate.append(np.nan)
-            pulse = np.nan
+            rows[i][pulse] = np.nan
             clock.append(watch)
-            time = watch
+            rows[i][time] = watch
         watch += 4
        # lastbmp = int(pulse)
         
@@ -54,8 +58,10 @@ def readInO2ring():
     
 def writeO2Data():
     with open('cleanedO2Ring.csv', 'w') as cleaned:
+        fieldnames = ['time','O2','heart rate','motion','02reminder','pulsereminder']
+        writer = csv.DictWriter(cleaned, fieldnames = fieldnames)
+        writer.writeheader()
         writer = csv.writer(cleaned, delimiter=',')
-        writer.writerow(header)
         for row in rows:
             writer.writerow(row)
 
