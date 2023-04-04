@@ -1,53 +1,70 @@
+#import biosignalsnotebooks as bsnb
+#import numpy as np
+#import pandas as pd
+
+from h5py import File
+
+# Package intended to work with arrays
+from numpy import array
+
+# biosignalsnotebooks python package
+import biosignalsnotebooks as bsnb
+file_folder = ""
+file_path ="EMILY\emily0007804b1875_2022-12-15_16-24-08-tfr.h5"
+
+h5_object = File(file_path)
+
+# Keys list (.h5 hierarchy ground level)
+list(h5_object.keys())
+
+
+h5_group = h5_object.get('00:07:80:3B:46:61')
+print ("Second hierarchy level: " + str(list(h5_group)))
+
+print ("Metadata of h5_group: \n" + str(list(h5_group.attrs.keys())))
+
+sampling_rate = h5_group.attrs.get("sampling rate")
+print ("Sampling Rate: " + str(sampling_rate))
+
+h5_sub_group = h5_group.get("raw")
+print("Third hierarchy level: " + str(list(h5_sub_group)))
+
+h5_data = h5_sub_group.get("channel_1")
+
+# Conversion of a nested list to a flatten list by list-comprehension
+# The following line is equivalent to:
+# for sublist in h5_data:
+#    for item in sublist:
+#        flat_list.append(item)
+data_list = [item for sublist in h5_data for item in sublist]
+time = bsnb.generate_time(data_list, sampling_rate)
+
+# Signal data samples values and graphical representation.
+print (array([item for sublist in h5_data for item in sublist]))
+bsnb.plot([time], [data_list], x_axis_label="Time (s)", y_axis_label="Raw Data")
+
+
+##################################################################################################################
+
+import biosignalsnotebooks as bsnb
 import numpy as np
-import mne
-import os
-import mne.time_frequency
+import pandas as pd
+
+file_path = "demo.h5"
+
+# Loading Data
+data, header = bsnb.load(file_path)
+print ("\033[1mHeader:\n\033[0m" + str(header) + "\n\033[1mData:\033[0m\n" + str(data))
+
+channel_data = [data['CH1'], data['CH2'], data['CH3']]
 
 
-sample_data_folder = mne.datasets.sample.data_path()
-#raw = mne.io.read_raw_edf('EMILY\emily0007804b1875_2022-12-15_16-24-08.edf', preload = 'true')
-#raw = raw.pick_types(meg=False, eeg=True, eog=False,)
-#h5 has events
-raw = mne.time_frequency.read_tfrs('EMILY\emily0007804b1875_2022-12-15_16-24-08.h5')
-raw = raw.pick_types(meg=False, eeg=True, eog=False,)
-print(type(raw))
-data_array = raw[:][0]
-#data = np.array([raw])
-
-#print(raw)
-#print(raw.info)
-
-#prints frequency vs. amplitude 
-raw.plot_psd(fmax=20)
+# to np array
+np_data = np.array(channel_data)
+print(np_data.shape())
+print(np_data[0])
 
 
-
-#rawTimeData = mne.io.RawArray(data = timeData, info = raw.info)
-#timeData.plot_psd()
-#timeData.plot()
-
-
-
-
-"""
-
-
-# set up and fit the ICA
-ica = mne.preprocessing.ICA(n_components=20, random_state=97, max_iter=800)
-ica.fit(raw)
-ica.exclude = [1, 2]  # details on how we picked these are omitted here
-ica.plot_properties(raw, picks=ica.exclude)
-
-
-
-orig_raw = raw.copy()
-raw.load_data()
-ica.apply(raw)
-
-# show some frontal channels to clearly illustrate the artifact removal
-chs = [ 'EEG 001', 'EEG 002']
-chan_idxs = [raw.ch_names.index(ch) for ch in chs]
-orig_raw.plot(order=chan_idxs, start=12, duration=4)
-#raw.plot(order=chan_idxs, start=12, duration=4)
-
-"""
+# to pd DataFrame
+pd_df = pd.DataFrame(data=channel_data, columns=["CH1", "CH2", "CH3"])
+display(pd_df.head(10))
