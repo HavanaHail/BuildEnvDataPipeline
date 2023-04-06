@@ -1,24 +1,36 @@
 #import biosignalsnotebooks as bsnb
 #import numpy as np
 #import pandas as pd
-
-from h5py import File
+import biosignalsnotebooks as bsnb
+import h5py
+from jinja2.utils import markupsafe
+from markupsafe import Markup
 
 # Package intended to work with arrays
 from numpy import array
 
-# biosignalsnotebooks python package
-import biosignalsnotebooks as bsnb
-file_folder = ""
-file_path ="EMILY\emily0007804b1875_2022-12-15_16-24-08-tfr.h5"
+markupsafe.Markup()
+Markup('')
 
-h5_object = File(file_path)
+file_folder = ""
+file_path ="/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/EMILY/emily0007804b1875_2022-12-15_16-24-08_tfr.h5"
+
+h5_object = h5py.File(file_path)
+a_group_key = list(h5_object.keys())[0]
+
+# get the object type for a_group_key: usually group or dataset
+print(type(h5_object[a_group_key]))
+
+print("Keys: %s" % h5_object.keys())
+
 
 # Keys list (.h5 hierarchy ground level)
 list(h5_object.keys())
 
 
-h5_group = h5_object.get('00:07:80:3B:46:61')
+#h5_group = h5_object.get('00:07:80:3B:46:61')
+#h5_group = h5_object.get('00:07:80:4B:18:75')
+h5_group = h5_object.get(a_group_key)
 print ("Second hierarchy level: " + str(list(h5_group)))
 
 print ("Metadata of h5_group: \n" + str(list(h5_group.attrs.keys())))
