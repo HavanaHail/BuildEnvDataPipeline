@@ -39,16 +39,18 @@ def createExperiment():
             if  'O2' in os.path.basename(f):
                 #Process o2 data Todo
 
+
                 print(os.path.basename(f))
             elif 'EEG' in os.path.basename(f):
                     #Process eeg data Todo
                 print(os.path.basename(f))
             elif 'PANAS' in os.path.basename(f):
-                    #Process panas data Todo
+                    #Process panas data
                 if(panasCount < 2):
-                    data = getPanasScores("/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/CSV/test/CSVTEST_PANAS.csv", idNum)
+                    #data = getPanasScores("/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/CSV/test/CSVTEST_PANAS.csv", idNum)
+                    data = getPanasScores(f, idNum)
                     panasCount = panasCount + 1
-                    target = target_path + '/' + 'PANAS' + str(panasCount) +'.csv' ##Panas number hardcoded for now
+                    target = target_path + '/' + 'PANAS' + str(panasCount) +'.csv'
                     pd.DataFrame(data).to_csv(target, index_label="i", header=['Time/Date','PANAS_PA','PANAS_NA','PANAS_SN','ID'])
 
 
@@ -56,7 +58,6 @@ def createExperiment():
 
 def getPanasScores(target, idNum):
     csv_file = csv.reader(open(target, "r"), delimiter=",")
-    panasCount = 1
     array = []
 
     for row in csv_file:
@@ -73,10 +74,10 @@ def getPanasScores(target, idNum):
 rows = []
 heartRate = []
 clock = []
-def readInO2ring():
+def readInO2ring(fileName):
     
     ave = []
-    with open("O2Ring_20230213132922.csv", 'r') as file:
+    with open(fileName, 'r') as file:
         csvreader = csv.reader(file)
         header = next(csvreader)
         for row in csvreader:
@@ -121,8 +122,8 @@ def readInO2ring():
         # print(row)
     ave = int(mean/count)
     
-def writeO2Data():
-    with open('cleanedO2Ring.csv', 'w') as cleaned:
+def writeO2Data(fileName):
+    with open(fileName, 'w') as cleaned:
         fieldnames = ['time','O2','heart rate','motion','02reminder','pulsereminder']
         writer = csv.DictWriter(cleaned, fieldnames = fieldnames)
         writer.writeheader()
