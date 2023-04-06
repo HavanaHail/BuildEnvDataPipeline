@@ -5,6 +5,8 @@ import biosignalsnotebooks as bsnb
 import h5py
 from jinja2.utils import markupsafe
 from markupsafe import Markup
+from bokeh.layouts import gridplot
+from bokeh.io import output_file
 
 # Package intended to work with arrays
 from numpy import array
@@ -12,11 +14,15 @@ from numpy import array
 markupsafe.Markup()
 Markup('')
 
+output_file("layout.html")
+
 file_folder = ""
-file_path ="/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/EMILY/emily0007804b1875_2022-12-15_16-24-08_tfr.h5"
+file_path ="/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/sebastian 11-18/experiemtData-11-18.h5"
 
 h5_object = h5py.File(file_path)
 a_group_key = list(h5_object.keys())[0]
+
+#grid = gridplot()
 
 # get the object type for a_group_key: usually group or dataset
 print(type(h5_object[a_group_key]))
@@ -53,4 +59,4 @@ time = bsnb.generate_time(data_list, sampling_rate)
 
 # Signal data samples values and graphical representation.
 print (array([item for sublist in h5_data for item in sublist]))
-bsnb.plot([time], [data_list], x_axis_label="Time (s)", y_axis_label="Raw Data")
+bsnb.plot([time], [data_list], x_axis_label="Time (s)", y_axis_label="Raw Data", show_plot=True, save_plot=True)
