@@ -5,9 +5,9 @@ from numpy import double
 app = typer.Typer()
 
 
-#filePath = "CSV/test/Built_Environment_Survey_January 15_2023_12_24.csv"
+#filePath = "CSV/test/Built_Environment_Survey_January_15_2023_12_24.csv"
 @app.command()
-def readcsv():
+def readPANAS():
     filePath = input("Enter CSV filepath:\n")
     f = open(filePath, 'r')
     reader = csv.reader(f)
@@ -19,6 +19,13 @@ def readcsv():
     print(f"results: {results}")
 
     #Add to database
+@app.command()
+def readEEG():
+    filePath = input("Enter CSV filepath:\n")
+    f = open(filePath, 'r')
+    reader = csv.reader(f)
+    results = {}
+    ## other stuff
 
 if __name__ == "__main__":
     app()
