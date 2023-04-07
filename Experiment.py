@@ -211,9 +211,9 @@ def readEeg(filePath, targetPath):
     print (array([item for sublist in h5_data for item in sublist]))
     bsnb.plot([time], [data_list], x_axis_label="Time (s)", y_axis_label="Raw Data", show_plot=False, save_plot=True)
 
-    data = np.array([data_list, time])
+    data = np.array([time, data_list]).transpose()
     df = pd.DataFrame(data)
-    df.to_csv(targetPath + "/eeg.csv")
+    df.to_csv(targetPath + "/eeg.csv", header= ["Time", "Data"], index_label="i")
     #data.transpose()
     # with open(filePath, 'w', newline='') as file:
     #     writer = csv.writer(file)
