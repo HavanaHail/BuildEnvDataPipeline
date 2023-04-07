@@ -24,20 +24,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/EMILY/Built_Environment_Survey_January_15_2023_12_24PANAS.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/EMILY/CSVTEST_PANAS.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/EMILY/Result1856/PANAS1.csv">
           <value>
             <Attribute>
@@ -46,13 +32,6 @@
           </value>
         </entry>
         <entry key="/O2Ring_20221118173026_OXIRecord.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/O2Ring_20230213132922.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

@@ -211,14 +211,18 @@ def readEeg(filePath, targetPath):
     print (array([item for sublist in h5_data for item in sublist]))
     bsnb.plot([time], [data_list], x_axis_label="Time (s)", y_axis_label="Raw Data", show_plot=False, save_plot=True)
 
-    #data = np.array([data_list, time])
-    with open(filePath, 'w', newline='') as file:
-        writer = csv.writer(file)
-        # for length of list
-        writer.writerow(["time", "data"])
-        print(type(data_list))
-        for line in data_list:
-            writer.writerow([time, data_list])
+    data = np.array([data_list, time])
+    df = pd.DataFrame(data)
+    df.to_csv(targetPath + "/eeg.csv")
+    #data.transpose()
+    # with open(filePath, 'w', newline='') as file:
+    #     writer = csv.writer(file)
+    #     # for length of list
+    #     writer.writerow(["time", "data"])
+    #     print(type(data_list))
+    #     for line in data:
+    #         print(line)
+    #         writer.writerow([line.time, line.data_list])
 
 if __name__ == '__main__':
     createExperiment()
