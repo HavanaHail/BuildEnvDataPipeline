@@ -29,7 +29,7 @@ def createExperiment():
     #ASk questions about - Who ran the experiment & Start and end time & brief report and put into text file
 
     idNum = 1856 #hardcoded for now
-    folder_path = '/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/EMILY'
+    folder_path = '/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/sebastian 11-18'
     #target_path = '/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/EMILY'
     panasCount = 0
 
@@ -46,13 +46,17 @@ def createExperiment():
             #print(os.path.basename(f))
             if  'O2' in os.path.basename(f):
                 #Process o2 data Todo
-                readInO2ring(f)
+                readInO2ring(f, target_path)
+                #target = target_path + "/O2.csv"
+                #os.rename(data, target)
+
+
 
                 print(os.path.basename(f))
             elif 'EEG' in os.path.basename(f):
                 #Process eeg data
                 readEeg(f)
-                print(os.path.basename(f))
+                #print(os.path.basename (f))
             elif 'PANAS' in os.path.basename(f):
                     #Process panas data
                 if(panasCount < 2):
@@ -83,7 +87,7 @@ def getPanasScores(target, idNum):
 rows = []
 heartRate = []
 clock = []
-def readInO2ring(fileName):
+def readInO2ring(fileName, targetPath):
     
     ave = []
     with open(fileName, 'r') as file:
@@ -91,7 +95,7 @@ def readInO2ring(fileName):
         header = next(csvreader)
         for row in csvreader:
             rows.append(row)
-    print(header)
+    #print(header)
     
     # Way to specify which column we are using
     mean = 0
@@ -130,16 +134,17 @@ def readInO2ring(fileName):
     #  paresedRow = row.split(",")
         # print(row)
     ave = int(mean/count)
-    writeO2Data(fileName)
+    writeO2Data(fileName, targetPath)
     
-def writeO2Data(fileName):
-    with open(fileName, 'w') as cleaned:
+def writeO2Data(fileName, targetPath):
+    with open(targetPath + "/02.csv", 'w') as cleaned:
         fieldnames = ['time','O2','heart rate','motion','02reminder','pulsereminder']
         writer = csv.DictWriter(cleaned, fieldnames = fieldnames)
         writer.writeheader()
         writer = csv.writer(cleaned, delimiter=',')
         for row in rows:
             writer.writerow(row)
+        #return cleaned
 
 
 

@@ -30,7 +30,7 @@ class Participant:
     heartRate = []
     clock = []
     ave = []
-    with open("O2Ring_20230213132922.csv", 'r') as file:
+    with open("sebastian 11-18/O2Ring_20230213132922.csv", 'r') as file:
         csvreader = csv.reader(file)
         header = next(csvreader)
         for row in csvreader:
