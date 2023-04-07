@@ -1,23 +1,15 @@
 import csv
 import sys,os
 
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
+import h5py
+from jinja2.utils import markupsafe
+from markupsafe import Markup
+from bokeh.io import output_file
 from numpy import nan
 from numpy import double
-
-#import biosignalsnotebooks as bsnb
-#import numpy as np
-#import pandas as pd
-
-from h5py import File
-
-# Package intended to work with arrays
 from numpy import array
-
-# biosignalsnotebooks python package
 import biosignalsnotebooks as bsnb
 
 
@@ -40,21 +32,26 @@ def createExperiment():
     folder_path = '/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/EMILY'
     #target_path = '/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/EMILY'
     panasCount = 0
+
+
     target_path = os.path.join(folder_path, "Result" + str(idNum))
+
     if not os.path.exists(target_path):
         os.mkdir(target_path)
-
+    textFilePath = target_path + "/report.txt"
+    writeReport(textFilePath)
     for file in os.listdir(folder_path):
         f = os.path.join(folder_path, file)
         if os.path.isfile(f):
             #print(os.path.basename(f))
             if  'O2' in os.path.basename(f):
                 #Process o2 data Todo
-
+                readInO2ring(f)
 
                 print(os.path.basename(f))
             elif 'EEG' in os.path.basename(f):
-                    #Process eeg data Todo
+                #Process eeg data
+                readEeg(f)
                 print(os.path.basename(f))
             elif 'PANAS' in os.path.basename(f):
                     #Process panas data
@@ -144,69 +141,68 @@ def writeO2Data(fileName):
             writer.writerow(row)
 
 
-file_folder = ""
-file_path ="EMILY\emily0007804b1875_2022-12-15_16-24-08-tfr.h5"
 
-h5_object = File(file_path)
+def writeReport(filePath):
+    names = input("Please enter the names of the people who ran the experiment.\n")
+    summary = input("Please provide a brief summary of the experiment\n")
+    data = [names, summary]
+    with open(filePath, "w") as txt_file:
+        for line in data:
+            txt_file.write("".join(line) + "\n")
 
-# Keys list (.h5 hierarchy ground level)
-list(h5_object.keys())
 
 
-h5_group = h5_object.get('00:07:80:3B:46:61')
-print ("Second hierarchy level: " + str(list(h5_group)))
+#### EEG COODE
+def readEeg(filePath):
+    markupsafe.Markup()
+    Markup('')
 
-print ("Metadata of h5_group: \n" + str(list(h5_group.attrs.keys())))
+    output_file("layout.html")
 
-sampling_rate = h5_group.attrs.get("sampling rate")
-print ("Sampling Rate: " + str(sampling_rate))
+    file_folder = ""
+    #file_path ="/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/sebastian 11-18/experiemtData-11-18.h5"
 
-h5_sub_group = h5_group.get("raw")
-print("Third hierarchy level: " + str(list(h5_sub_group)))
+    h5_object = h5py.File(filePath)
+    a_group_key = list(h5_object.keys())[0]
 
-h5_data = h5_sub_group.get("channel_1")
+    #grid = gridplot()
 
-# Conversion of a nested list to a flatten list by list-comprehension
-# The following line is equivalent to:
-# for sublist in h5_data:
-#    for item in sublist:
-#        flat_list.append(item)
-data_list = [item for sublist in h5_data for item in sublist]
-time = bsnb.generate_time(data_list, sampling_rate)
+    # get the object type for a_group_key: usually group or dataset
+    print(type(h5_object[a_group_key]))
 
-# Signal data samples values and graphical representation.
-print (array([item for sublist in h5_data for item in sublist]))
-bsnb.plot([time], [data_list], x_axis_label="Time (s)", y_axis_label="Raw Data")
+    print("Keys: %s" % h5_object.keys())
 
-# def readPANAS(filePath):
-#     #filePath = input("Enter CSV filepath:\n")
-#     f = open(filePath, 'r')
-#     reader = csv.reader(f)
-#     results = {}
-#
-#     for row in reader:
-#         results[row[0]] = {'PANAS_PA': (double(row[1])) / 10, 'PANAS_NA': (double(row[2])) / 10,
-#                            'PANAS_SN': (double(row[3])) / 3}
-#
-#     #print(f"results: {results}")
-#     return results
-# def readPANAS2(filePath):
-#     with open(filePath, 'r') as data:
-#         for line in csv.reader(data):
-#             print(line)
-#         return data
 
-# def panasToCSV(target, dict):
-#     field_names = ['PANAS_PA', 'PANAS_NA', 'PANAS_SN']
-#
-#     with open(target, 'w') as csvFile:
-#         print(target)
-#         writer = csv.DictWriter(csvFile, fieldnames=field_names)
-#         writer.writeheader()
-#        # print(dict)
-#         writer.writerows(dict) ##NOT WORKING - I/O operation on closed file
-#         return csvFile
+    # Keys list (.h5 hierarchy ground level)
+    list(h5_object.keys())
 
+
+    #h5_group = h5_object.get('00:07:80:3B:46:61')
+    #h5_group = h5_object.get('00:07:80:4B:18:75')
+    h5_group = h5_object.get(a_group_key)
+    print ("Second hierarchy level: " + str(list(h5_group)))
+
+    print ("Metadata of h5_group: \n" + str(list(h5_group.attrs.keys())))
+
+    sampling_rate = h5_group.attrs.get("sampling rate")
+    print ("Sampling Rate: " + str(sampling_rate))
+
+    h5_sub_group = h5_group.get("raw")
+    print("Third hierarchy level: " + str(list(h5_sub_group)))
+
+    h5_data = h5_sub_group.get("channel_1")
+
+    # Conversion of a nested list to a flatten list by list-comprehension
+    # The following line is equivalent to:
+    # for sublist in h5_data:
+    #    for item in sublist:
+    #        flat_list.append(item)
+    data_list = [item for sublist in h5_data for item in sublist]
+    time = bsnb.generate_time(data_list, sampling_rate)
+
+    # Signal data samples values and graphical representation.
+    print (array([item for sublist in h5_data for item in sublist]))
+    bsnb.plot([time], [data_list], x_axis_label="Time (s)", y_axis_label="Raw Data", show_plot=True, save_plot=True)
 
 if __name__ == '__main__':
     createExperiment()
