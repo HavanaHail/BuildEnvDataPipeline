@@ -23,13 +23,13 @@ class Experiment:
         self.info = info
 
 def createExperiment():
-    #idNum = sys.argv[1]
-    #folder_path = sys.argv[2] --> Where the folder is located
+    idNum = sys.argv[1]
+    folder_path = sys.argv[2] #--> Where the folder is located
 
     #ASk questions about - Who ran the experiment & Start and end time & brief report and put into text file
 
-    idNum = 1856 #hardcoded for now
-    folder_path = '/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/sebastian 11-18'
+    #idNum = 1856 #hardcoded for now
+    #folder_path = '/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/sebastian 11-18'
     #target_path = '/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/EMILY'
     panasCount = 0
 
