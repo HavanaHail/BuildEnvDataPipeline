@@ -130,6 +130,7 @@ def readInO2ring(fileName):
     #  paresedRow = row.split(",")
         # print(row)
     ave = int(mean/count)
+    writeO2Data(fileName)
     
 def writeO2Data(fileName):
     with open(fileName, 'w') as cleaned:
