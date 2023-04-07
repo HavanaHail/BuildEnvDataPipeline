@@ -53,9 +53,9 @@ def createExperiment():
 
 
                 print(os.path.basename(f))
-            elif 'EEG' in os.path.basename(f):
+            elif 'h5' in os.path.basename(f):
                 #Process eeg data
-                readEeg(f)
+                readEeg(f, target_path)
                 #print(os.path.basename (f))
             elif 'PANAS' in os.path.basename(f):
                     #Process panas data
@@ -159,11 +159,11 @@ def writeReport(filePath):
 
 
 #### EEG COODE
-def readEeg(filePath):
+def readEeg(filePath, targetPath):
     markupsafe.Markup()
     Markup('')
 
-    output_file("layout.html")
+    output_file(targetPath + "/layout.html")
 
     file_folder = ""
     #file_path ="/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/sebastian 11-18/experiemtData-11-18.h5"
@@ -208,7 +208,7 @@ def readEeg(filePath):
 
     # Signal data samples values and graphical representation.
     print (array([item for sublist in h5_data for item in sublist]))
-    bsnb.plot([time], [data_list], x_axis_label="Time (s)", y_axis_label="Raw Data", show_plot=True, save_plot=True)
+    bsnb.plot([time], [data_list], x_axis_label="Time (s)", y_axis_label="Raw Data", show_plot=False, save_plot=True)
 
 if __name__ == '__main__':
     createExperiment()
