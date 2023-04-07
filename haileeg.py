@@ -17,7 +17,7 @@ Markup('')
 output_file("layout.html")
 
 file_folder = ""
-file_path ="/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/sebastian 11-18/experiemtData-11-18.h5"
+file_path ="C:\Users\padea\OneDrive\Documents\MQP Code\BuildEnvDataPipeline\EMILY\emily0007804b1875_2022-12-15_16-24-08_tfr.h5"
 
 h5_object = h5py.File(file_path)
 a_group_key = list(h5_object.keys())[0]
@@ -60,3 +60,13 @@ time = bsnb.generate_time(data_list, sampling_rate)
 # Signal data samples values and graphical representation.
 print (array([item for sublist in h5_data for item in sublist]))
 bsnb.plot([time], [data_list], x_axis_label="Time (s)", y_axis_label="Raw Data", show_plot=True, save_plot=True)
+
+import csv
+
+data = array.array[data_list, time]
+with open('students.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+     #for length of list
+    writer.writerow(["time", "data"]) 
+    for i in len(data_list):
+        writer.writerow([time[i], data_list[i]])
