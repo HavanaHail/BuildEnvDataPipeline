@@ -52,27 +52,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/sebastian 11-18/Result1856/02.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/sebastian 11-18/Result1856/PANAS1.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/sebastian 11-18/Result1856/eeg.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
       </map>
     </option>
   </component>
