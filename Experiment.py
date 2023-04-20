@@ -1,5 +1,6 @@
 import csv
 import sys,os
+from matplotlib import pyplot as plt
 
 import pandas as pd
 import numpy as np
@@ -133,6 +134,7 @@ def readInO2ring(fileName, targetPath):
     #  paresedRow = row.split(",")
         # print(row)
     ave = int(mean/count)
+    makeGraph(heartRate,clock,ave)
     writeO2Data(fileName, targetPath)
     
 def writeO2Data(fileName, targetPath):
@@ -144,6 +146,13 @@ def writeO2Data(fileName, targetPath):
         for row in rows:
             writer.writerow(row)
         #return cleaned
+
+def makeGraph(pulse,time, mean):
+    plt.axhline(y=mean,color='r',linestyle = 'dashed',label = 'Average')
+    plt.xlabel('time(secs)')
+    plt.ylabel('heartrate')
+    plt.plot(time,pulse, label='Pulse Over Time')
+    plt.show()
 
 
 
