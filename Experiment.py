@@ -11,7 +11,6 @@ from numpy import nan
 from numpy import double
 from numpy import array
 import biosignalsnotebooks as bsnb
-import matplotlib.pyplot as plt
 
 
 class Experiment:
@@ -135,17 +134,6 @@ def readInO2ring(fileName, targetPath):
     #  paresedRow = row.split(",")
         # print(row)
     ave = int(mean/count)
-    print("Pulse average is: ", ave)
-    plt.plot(clock,heartRate, label = 'Pulse')
-    plt.axhline(y=ave, color = 'r', linestyle = 'dashed', label = 'Average')
-    plt.axvline(x=120,color ='g',linestyle ='dashed')
-    plt.axvline(x=300,color ='g',linestyle ='dashed')
-    plt.axvline(x=800,color ='g',linestyle ='dashed')
-    plt.xlabel('time (secs)')
-    plt.ylabel('heartrate')
-    plt.xticks(rotation=90,fontsize='small')
-    plt.title('participant #')
-    plt.show()
     writeO2Data(fileName, targetPath)
     
 def writeO2Data(fileName, targetPath):
@@ -223,14 +211,18 @@ def readEeg(filePath, targetPath):
     print (array([item for sublist in h5_data for item in sublist]))
     bsnb.plot([time], [data_list], x_axis_label="Time (s)", y_axis_label="Raw Data", show_plot=False, save_plot=True)
 
-    data = np.array([data_list, time])
-    with open(filePath, 'w', newline='') as file:
-        writer = csv.writer(file)
-        # for length of list
-        writer.writerow(["time", "data"])
-        print(type(data_list))
-        for line in data:
-            writer.writerow(data.data_list,data.time)
+    data = np.array([time, data_list]).transpose()
+    df = pd.DataFrame(data)
+    df.to_csv(targetPath + "/eeg.csv", header= ["Time", "Data"], index_label="i")
+    #data.transpose()
+    # with open(filePath, 'w', newline='') as file:
+    #     writer = csv.writer(file)
+    #     # for length of list
+    #     writer.writerow(["time", "data"])
+    #     print(type(data_list))
+    #     for line in data:
+    #         print(line)
+    #         writer.writerow([line.time, line.data_list])
 
 if __name__ == '__main__':
     createExperiment()
