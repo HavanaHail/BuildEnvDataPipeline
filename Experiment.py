@@ -4,13 +4,15 @@ import sys,os
 import pandas as pd
 import numpy as np
 import h5py
+from bokeh.plotting import figure
 from jinja2.utils import markupsafe
 from markupsafe import Markup
-from bokeh.io import output_file
-from numpy import nan
-from numpy import double
+from bokeh.io import output_file, show
+from numpy import nan, average
+from numpy import random
 from numpy import array
 import biosignalsnotebooks as bsnb
+
 
 
 class Experiment:
@@ -23,13 +25,13 @@ class Experiment:
         self.info = info
 
 def createExperiment():
-    #idNum = sys.argv[1]
-    #folder_path = sys.argv[2] --> Where the folder is located
+    idNum = sys.argv[1]
+    folder_path = sys.argv[2] #--> Where the folder is located
 
     #ASk questions about - Who ran the experiment & Start and end time & brief report and put into text file
 
-    idNum = 1856 #hardcoded for now
-    folder_path = '/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/sebastian 11-18'
+    #idNum = 1856 #hardcoded for now
+    #folder_path = '/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/sebastian 11-18'
     #target_path = '/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/EMILY'
     panasCount = 0
 
@@ -49,10 +51,7 @@ def createExperiment():
                 readInO2ring(f, target_path)
                 #target = target_path + "/O2.csv"
                 #os.rename(data, target)
-
-
-
-                print(os.path.basename(f))
+                #print(os.path.basename(f))
             elif 'h5' in os.path.basename(f):
                 #Process eeg data
                 readEeg(f, target_path)
@@ -163,7 +162,7 @@ def readEeg(filePath, targetPath):
     markupsafe.Markup()
     Markup('')
 
-    output_file(targetPath + "/layout.html")
+    output_file(targetPath + "/eegVis.html")
 
     file_folder = ""
     #file_path ="/Users/nwhalen/Developer/MQP/BuildEnvDataPipeline/sebastian 11-18/experiemtData-11-18.h5"
@@ -208,12 +207,28 @@ def readEeg(filePath, targetPath):
 
 
     # Signal data samples values and graphical representation.
-    print (array([item for sublist in h5_data for item in sublist]))
-    bsnb.plot([time], [data_list], x_axis_label="Time (s)", y_axis_label="Raw Data", show_plot=False, save_plot=True)
+    # print (array([item for sublist in h5_data for item in sublist]))
+    # bsnb.plot([time], [data_list], x_axis_label="Time (s)", y_axis_label="Raw Data", show_plot=False, save_plot=True)
 
     data = np.array([time, data_list]).transpose()
     df = pd.DataFrame(data)
     df.to_csv(targetPath + "/eeg.csv", header= ["Time", "Data"], index_label="i")
+
+    #http://notebooks.pluxbiosignals.com/notebooks/Categories/Visualise/plot_acquired_data_single_rev.html
+
+    data, header = bsnb.load(filePath, get_header=True)
+    print("\033[1mHeader:\n\033[0m" + str(header) + "\n\033[1mData:\033[0m\n" + str(data))
+    signal = data["CH1"]
+    time = bsnb.generate_time(signal, header["sampling rate"])
+    baseline = average(signal)
+    baseline_shift = 0.50 * baseline
+    data_noise = signal + random.normal(0, 1000, len(signal)) + baseline_shift
+    bokeh_figure = figure(x_axis_label='Time (s)', y_axis_label='Raw Data')
+    bokeh_figure.line(time, signal, legend_label="Original Data")
+    bokeh_figure.line(time, data_noise, legend_label="Noisy Data")
+    #show(bokeh_figure)
+    bsnb.plot([time, time], [signal, data_noise], legend_label=["Original Data", "Noisy Data"],
+              y_axis_label=["Raw Data", "Raw Data"], x_axis_label="Time (s)")
     #data.transpose()
     # with open(filePath, 'w', newline='') as file:
     #     writer = csv.writer(file)
